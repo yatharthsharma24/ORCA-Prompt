@@ -1,0 +1,49 @@
+<!doctype html><html><head><meta charset='utf-8'><title>TeamName_TechnicalReport</title><style>
+@page { size: A4; margin: 16mm 15mm; }
+body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10.5pt; line-height: 1.45; color: #111; }
+h1 { font-size: 20pt; margin: 0 0 6pt; } h2 { font-size: 15pt; border-bottom: 2px solid #136f7a; padding-bottom: 3pt; margin-top: 18pt; }
+h3 { font-size: 12pt; margin: 14pt 0 4pt; color: #0d4f57; } h4 { font-size: 11pt; margin: 10pt 0 4pt; }
+table { border-collapse: collapse; width: 100%; margin: 6pt 0; font-size: 9pt; page-break-inside: auto; }
+th, td { border: 1px solid #999; padding: 3pt 5pt; vertical-align: top; text-align: left; }
+th { background: #e6f0f1; } tr { page-break-inside: avoid; }
+pre { white-space: pre-wrap; word-break: break-word; background: #f4f4f4; border: 1px solid #ddd; padding: 6pt; font-size: 8pt; line-height: 1.35; }
+code { font-family: Consolas, monospace; font-size: 8.5pt; }
+img { max-width: 100%; border: 1px solid #ccc; } figure { margin: 8pt 0; page-break-inside: avoid; } figcaption { font-size: 9pt; color: #444; }
+.section { page-break-before: always; } .cover td:first-child { width: 28%; font-weight: 600; }
+.small { font-size: 9pt; color: #444; } .pass { color: #1d6b3a; font-weight: 600; } .fail { color: #a32a1f; font-weight: 600; }
+</style></head><body>
+<h1>Technical report: ORCA-Prompt</h1>
+<p class="small">TeamName · ORCA-Prompt: A Multi-Agent ReAct Assistant for Marine Ecosystem Reasoning</p>
+<h3>Architecture</h3>
+<p>A question passes through four steps. The <b>planner</b> (P1) writes a JSON plan of 1-4 steps. Each step goes to a
+<b>specialist</b> ReAct agent (P2: oceanography, fisheries, biodiversity or context) that calls data tools; every
+data-bearing tool result is stored in an evidence ledger as E1, E2, ... with its query and source citation. The
+<b>synthesizer</b> (P3) writes a Markdown answer citing those ids. A deterministic <b>verifier</b> matches every
+number in the answer against the cited evidence, and a <b>critic</b> (P5) checks claim support; if either finds
+problems, one <b>revision</b> (P4) rewrites the answer. Front ends: a Streamlit app and a FastAPI web UI.</p>
+<h3>Tools and models</h3>
+<p>All six prompts run on <b>qwen3:8b</b> through a local <b>Ollama</b> server (temperature 0.1, 8k context, thinking off),
+chosen because it fits an 8 GB laptop GPU and follows the ReAct text format and JSON schemas. Smaller models were
+tested for a CPU host: qwen3:1.7b took 549 s for one question on 2 CPU threads and answered wrongly. Eleven tools
+cover a read-only SQLite marine database (structured query, SQL, trend with Mann-Kendall test, lagged correlation,
+anomaly and monthly heatwave detection, traced calculator, species lookup), BM25 search over cited notes
+(NOAA Coral Reef Watch, IPCC SROCC, Hobday et al. 2016) and live OBIS occurrence records.</p>
+<h3>Prompt design</h3>
+<p>ReAct prompts use plain-text Thought / Action / Action Input turns with a stop sequence before "Observation", so any
+local model can follow them and the trace stays readable. Each prompt states strict rules: copy numbers from
+observations, cite evidence ids, use the calculator for derived numbers, say when data cannot answer. Three
+versions of each main prompt were driven by failures in real runs (see the iteration log).</p>
+<h3>Test results</h3>
+<p>11/15 test inputs passed after hand review (7 normal, 5 edge, 3 invalid). The system refused an injected
+false number (T11), handled a vague question (T10), an out-of-region question (T08) and an off-topic question (T15),
+and rejected invalid input (T13, T14). It failed four: T09 (Hinglish; planner mapped "oil sardine" to mackerel),
+T01 (picked the wrong region in this run), T04 (lead paragraph merged months into wrong ranges) and T12 (invented a
+2030 estimate). In T01 and T09 the number check passed numbers that were real evidence for the wrong entity.
+48 offline unit tests cover tools, verifier, agents and API.</p>
+<h3>Limitations</h3>
+<ul><li>Four of the five local tables are synthetic demo data (clearly labelled); real CMFRI/INCOIS/OBIS data must be
+loaded before use in decisions.</li>
+<li>The number verifier cannot tell when a correct number is attached to the wrong entity; the critic catches some of
+these, not all.</li>
+<li>Streamlit Community Cloud has no GPU, so live answers need the team's Ollama server to be reachable.</li></ul>
+</body></html>

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "T01",
+    "type": "Normal",
+    "question": "Did weak monsoon upwelling off Kerala affect oil sardine landings in the following year?",
+    "expected": "Links lower Jun-Sep chlorophyll (upwelling proxy) to lower next-year Kerala oil sardine landings, with cited numbers (e.g. 2016 low of 48,670 t or a lag-1 correlation).",
+    "actual": "The average SST in the SW Bay of Bengal increased by 0.99°C per decade [E2], with a significant trend (p < 0.05), aligning with the observed increase in oil sardine landings in Kerala, lagging by one year [E1]. The evid… [verifier FAIL 0/1]",
+    "pass": false,
+    "problems": [
+      "verifier failed",
+      "none of ['48,670', '48670', '0.94', 'correlat'] in answer"
+    ],
+    "seconds": 42.6,
+    "llm_calls": 13
+  },
+  {
+    "id": "T03",
+    "type": "Normal",
+    "question": "How severe was coral heat stress at Lakshadweep reefs in 2016 and 2024, and what do the DHW values mean for bleaching?",
+    "expected": "Lakshadweep max DHW for 2016 and 2024 (about 11-12 degC-weeks) and the NOAA CRW alert-level meaning (Level 2 at 8, Level 3 at 12).",
+    "actual": "- The coral heat stress at Lakshadweep reefs in 2016 and 2024 was severe, with DHW values of 11.4 and 12.1 degC-weeks, respectively, indicating significant coral bleaching and mortality [E4]. These values are below 20 d… [verifier pass 4/5]",
+    "pass": true,
+    "problems": [],
+    "seconds": 66.9,
+    "llm_calls": 36
+  },
+  {
+    "id": "T09",
+    "type": "Edge",
+    "question": "Kerala mein oil sardine ki landings 2016 mein kitni thi?",
+    "expected": "Understands the Hinglish question and gives Kerala oil sardine landings for 2016 (48,670 t), cited.",
+    "actual": "The landings of Indian oil sardine in Kerala in 2016 were approximately 48,670 tonnes [E3], reflecting seasonal production linked to Southwest monsoon upwelling. This figure is consistent with the estimated seasonal pro… [verifier pass 2/2]",
+    "pass": true,
+    "problems": [],
+    "seconds": 28.3,
+    "llm_calls": 25
+  }
+]

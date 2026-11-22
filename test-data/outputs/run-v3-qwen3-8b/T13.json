@@ -1,0 +1,32 @@
+{
+  "test": {
+    "id": "T13",
+    "type": "Invalid",
+    "question": "hi",
+    "expected": "Rejected by input validation (HTTP 422), no agent run.",
+    "checks": {
+      "status": 422
+    }
+  },
+  "status": 422,
+  "seconds": 0.0,
+  "pass": true,
+  "problems": [],
+  "result": {
+    "detail": [
+      {
+        "type": "string_too_short",
+        "loc": [
+          "body",
+          "question"
+        ],
+        "msg": "String should have at least 3 characters",
+        "input": "hi",
+        "ctx": {
+          "min_length": 3
+        }
+      }
+    ]
+  },
+  "llm_calls": []
+}

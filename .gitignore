@@ -4,6 +4,7 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .env
-data/*.sqlite
-data/*.tmp
+code/data/*.sqlite
+code/data/*.tmp
 *.egg-info/
+test-data/**/runs.sqlite

@@ -1,0 +1,6 @@
+{
+  "_about": "Hand review of run-v3-qwen3-8b. The automatic checks in inputs.json are keyword-based; a reviewer read every answer. Entries here override the automatic result.",
+  "T01": {"pass": false, "note": "Hand review: answer is wrong. It used SW Bay of Bengal chlorophyll, called the species 'unspecified' and reported r=0.016; the automatic check passed only because the word 'correlation' appears. Earlier runs of the same question were correct, so the result is not stable."},
+  "T04": {"pass": false, "note": "Hand review: bullets list the flagged months exactly, but the lead paragraph merges them into ranges that include months that were not flagged (e.g. '2015-08 to 2015-12' includes 2015-10 and 2015-11)."},
+  "T12": {"pass": false, "note": "Hand review: invents a 2030 estimate ('198,260 tonnes in 2030'), which is actually the 2024 value. The automatic regex missed it because the number comes before '2030'."}
+}

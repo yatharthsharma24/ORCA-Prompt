@@ -1,0 +1,16 @@
+[
+  {
+    "id": "T09",
+    "type": "Edge",
+    "question": "Kerala mein oil sardine ki landings 2016 mein kitni thi?",
+    "expected": "Understands the Hinglish question and gives Kerala oil sardine landings for 2016 (48,670 t), cited.",
+    "actual": "- Kerala mein oil sardine landings in 2016 were likely low, reflecting the decline trend observed in the mid-2010s, as indicated by a -87.547% percent change from 2013 to 2016 [E1]. The data is not recorded in the D-FIS… [verifier FAIL 0/1]",
+    "pass": false,
+    "problems": [
+      "verifier failed",
+      "none of ['48,670', '48670'] in answer"
+    ],
+    "seconds": 549.4,
+    "llm_calls": 17
+  }
+]

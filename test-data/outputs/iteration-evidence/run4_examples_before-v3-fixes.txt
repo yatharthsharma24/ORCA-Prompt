@@ -1,0 +1,30 @@
+﻿Q: Which months after 2013 had marine-heatwave-like SST in the Lakshadweep Sea?
+  plan: ['oceanography'] (planner)  passed=True score=1.0 (3/3) critic=0 revisions=0 33.9s
+  In the Lakshadweep Sea, there is insufficient baseline data to calculate the 90th percentile threshold for marine heatwaves, making it impossible to determine which months after 2013 had marine-heatwave-like SST [E1].
+  
+  - The lack of a 30-year baseline climatology prevents accurate identification of SST anomalies exceeding the 90th percentile [E1].
+  - Real marine data sources such as NOAA OISST and NOAA Coral Reef Watch could provide SST data, but no specific analysis has been conducted on the Lakshadweep Sea for the period 2014-2024 [E1].
+  
+  Caveats:
+  - The absence of a 30-year baseline dataset limits the ability to define marine heatwaves accurately [E1].
+  - The evidence cited is based on data sources and definitions rather than actual analysis of the Lakshadweep Sea SST data [E1].
+
+Q: How have olive ridley nesting counts in the NW Bay of Bengal changed, and what is the species' IUCN status?
+  plan: ['biodiversity', 'biodiversity'] (planner)  passed=True score=1.0 (0/0) critic=2 revisions=1 43.2s
+  Olive ridley nesting counts in the NW Bay of Bengal have shown no significant trend from 2008 to 2024, with a weak positive slope that is not statistically significant [E2]. The species, Lepidochelys olivacea, is listed as "Vulnerable" on the IUCN Red List [unverified].
+  
+  - Nesting counts exhibited a weak positive trend over 2008-2024, but the trend was not statistically significant [E2].
+  - The IUCN status of Lepidochelys olivacea is listed as "Vulnerable," though this information is unverified [unverified].
+  
+  - The trend analysis is based on synthetic data, which may not fully represent real-world variability [E1].
+
+Q: Did weak monsoon upwelling off Kerala affect oil sardine landings in the following year?
+  plan: ['oceanography', 'fisheries'] (planner)  passed=True score=1.0 (4/4) critic=5 revisions=1 75.3s
+  Weak monsoon upwelling off Kerala was correlated with lower oil sardine landings in the following year [E2]. For example, the 2015 upwelling anomaly of -3.446 was associated with a sharp decline in landings to 48,670 tonnes in 2016 [E2]. Conversely, strong upwelling years like 2012 (anomaly 1.345) were followed by higher landings of 390,830 tonnes in 2013 [E2].
+  
+  - The 2015 upwelling anomaly of -3.446 was associated with significantly lower oil sardine landings the following year (2016: 48,670 tonnes) [E2].
+  - The 2012 upwelling anomaly of 1.345 was linked to higher oil sardine landings the following year (2013: 390,830 tonnes) [E2].
+  - The correlation between upwelling anomalies and landings was observed across multiple years, suggesting a consistent pattern [E2].
+  
+  - The data used in this analysis is synthetic, which may not fully represent real-world variability [E1, E2].
+

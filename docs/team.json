@@ -1,0 +1,21 @@
+{
+  "team_id": "TXX",
+  "team_name": "TeamName",
+  "project_title": "ORCA-Prompt: A Multi-Agent ReAct Assistant for Marine Ecosystem Reasoning",
+  "project_title_short": "ORCAPrompt",
+  "batch": "<batch, e.g. B13-24>",
+  "faculty": "<faculty name>",
+  "links": {
+    "prototype": "<Streamlit Community Cloud URL>",
+    "repository": "https://github.com/yatharthsharma24/ORCA-Prompt",
+    "reel": "<Drive or unlisted YouTube URL>"
+  },
+  "reel_seconds": "<90-150>",
+  "milestone1_summary": "<one or two sentences: what the team submitted in Milestone 1>",
+  "members": [
+    {"name": "<Member 1>", "enrollment": "S24CSEU0000", "role": "<role>", "tasks": "<tasks done in Milestone 2>", "evidence": "<file / commit / prompt ID>", "percent": 25},
+    {"name": "<Member 2>", "enrollment": "S24CSEU0000", "role": "<role>", "tasks": "<tasks>", "evidence": "<evidence>", "percent": 25},
+    {"name": "<Member 3>", "enrollment": "S24CSEU0000", "role": "<role>", "tasks": "<tasks>", "evidence": "<evidence>", "percent": 25},
+    {"name": "<Member 4>", "enrollment": "S24CSEU0000", "role": "<role>", "tasks": "<tasks>", "evidence": "<evidence>", "percent": 25}
+  ]
+}

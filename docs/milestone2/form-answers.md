@@ -1,0 +1,34 @@
+# Values for the Microsoft Form (must match the PDF)
+
+- Q8 Project type: <choose up to 2>
+- Q9 Main AI tool and model: qwen3:8b (local, via Ollama) in a Python multi-agent app (Streamlit)
+- Q10 Number of prompts: 6
+- Q11 Prototype link: <Streamlit Community Cloud URL>
+- Q12 Repository link: https://github.com/yatharthsharma24/ORCA-Prompt
+- Q13 Reel link: <Drive or unlisted YouTube URL>
+- Q14 Reel length (seconds): <90-150>
+- Q15 Supporting document type: Technical report
+- Q16 Upload: TeamName_TechnicalReport.pdf
+- Q17 Number of test inputs: 15
+- Q18 Number of prompt versions: 12
+- Q19 Prototype status: Some modules working (11 of 13 Working, rest Partly working)
+- Q20 Working modules:
+  - Planner agent (P1, P6)
+  - Specialist agents (P2, 4 roles)
+  - Data tools
+  - Analysis tools
+  - Knowledge search
+  - Live OBIS tool
+  - Synthesizer (P3)
+  - Number verifier
+  - Streamlit app
+  - FastAPI service + web UI
+  - Real-data ingest
+- Q21 Upload: M2_TXX_ORCAPrompt.pdf
+- Q22 Main task of each member:
+  - S24CSEU0000 – <Member 1> – <tasks done in Milestone 2>
+  - S24CSEU0000 – <Member 2> – <tasks>
+  - S24CSEU0000 – <Member 3> – <tasks>
+  - S24CSEU0000 – <Member 4> – <tasks>
+- Q23 Note for evaluator: Open the Streamlit link and choose "Saved test runs" in the sidebar to see every recorded
+  test run (no login). "Ask live" works while our model server is online (shown in the sidebar).

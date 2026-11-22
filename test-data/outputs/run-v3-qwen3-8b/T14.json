@@ -1,0 +1,32 @@
+{
+  "test": {
+    "id": "T14",
+    "type": "Invalid",
+    "question": "   ",
+    "expected": "Whitespace-only question rejected by input validation (HTTP 422).",
+    "checks": {
+      "status": 422
+    }
+  },
+  "status": 422,
+  "seconds": 0.0,
+  "pass": true,
+  "problems": [],
+  "result": {
+    "detail": [
+      {
+        "type": "value_error",
+        "loc": [
+          "body",
+          "question"
+        ],
+        "msg": "Value error, question must have at least 3 non-space characters",
+        "input": "   ",
+        "ctx": {
+          "error": {}
+        }
+      }
+    ]
+  },
+  "llm_calls": []
+}

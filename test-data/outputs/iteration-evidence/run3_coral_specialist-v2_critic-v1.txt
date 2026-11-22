@@ -1,0 +1,76 @@
+﻿
+-- planning
+  Thought (planner): I need to find the coral heat stress data for Lakshadweep reefs in 2016 and 2024, and understand what the DHW values mean for bleaching. I will start by retrieving the coral reef monitoring data for Lakshadweep.
+  Action: describe_dataset {"dataset": "D-CORAL"}
+  Observation  D-CORAL (coral_reef_monitoring): Annual coral reef monitoring at six Indian reef sites, 2004-2024
+Live coral cover, percent of colonies bleached and annual maximum Degree Heating Weeks (DHW, degC-weeks) per site.
+Columns:
+  site: reef site name
+  reef_area: Lakshadweep, Andaman Islands, Gulf of Mannar, Gulf of Kutch
+  region: ocean region used to join with ocean_monthly
+  year: integer 2004-2024
+ 
+  Thought (planner): I need to find the max_dhw values for Lakshadweep reefs in 2016 and 2024, and understand what these DHW values mean for bleaching. I will now retrieve the coral reef monitoring data for Lakshadweep.
+  Action: describe_dataset {"dataset": "D-CORAL", "filters": {"region": "Lakshadweep Sea", "year": [2016, 2024]}}
+  Observation  D-CORAL (coral_reef_monitoring): Annual coral reef monitoring at six Indian reef sites, 2004-2024
+Live coral cover, percent of colonies bleached and annual maximum Degree Heating Weeks (DHW, degC-weeks) per site.
+Columns:
+  site: reef site name
+  reef_area: Lakshadweep, Andaman Islands, Gulf of Mannar, Gulf of Kutch
+  region: ocean region used to join with ocean_monthly
+  year: integer 2004-2024
+ 
+
+== PLAN (planner)
+  1. [oceanography] Filter D-CORAL for region 'Lakshadweep Sea' and years 2016 and 2024 to get max_dhw and bleached_pct values, then explain DHW thresholds for bleaching.
+
+== S1 Oceanography Analyst: Filter D-CORAL for region 'Lakshadweep Sea' and years 2016 and 2024 to get max_dhw and bleached_pct values, then explain DHW thresholds for bleaching.
+  Thought (oceanography): I need to filter the D-CORAL dataset for the region 'Lakshadweep Sea' and the years 2016 and 2024 to get the max_dhw and bleached_pct values for those years.
+  Action: query_data {"dataset": "D-CORAL", "columns": ["year", "max_dhw", "bleached_pct"], "where": {"region": "Lakshadweep Sea", "year": [2016, 2024]}, "group_by": ["year"], "order_by": "year"}
+  Observation E1 [E1] (SYNTHETIC demo data) D-CORAL rows:
+year | max_dhw | bleached_pct
+2016 | 11.4 | 94.3
+2024 | 12.1 | 96.6
+(2 rows; limit 100)
+  Thought (oceanography): I need to explain what the DHW values mean for bleaching, so I should search for information on degree heating weeks and bleaching thresholds.
+  Action: search_knowledge {"query": "degree heating weeks bleaching threshold", "k": 3}
+  Observation E2 [E2] [K-DHW#1] Degree Heating Weeks and coral bleaching alert levels: NOAA Coral Reef Watch (CRW) measures accumulated heat stress on coral reefs with Degree Heating Weeks (DHW). A HotSpot is the amount by which sea surface temperature exceeds the maximum monthly mean (MMM) climatology for a location. DHW sums HotSpots of at least 1 degC over a rolling 12-week window, so the unit is degC-weeks.
+
+[
+  Thought (oceanography): I have enough evidence to answer the question about coral heat stress at Lakshadweep reefs in 2016 and 2024, and what the DHW values mean for bleaching.
+  -> findings: In 2016, Lakshadweep reefs experienced a max_dhw of 11.4, which falls within the CRW Alert Level 3 range (12 degC-weeks), indicating extreme heat stress and likely severe bleaching [E1][E2]. In 2024, the max_dhw increased to 12.1, further confirming extreme heat stress and significant coral mortality [E1][E2].
+
+-- synthesis
+
+-- critic
+
+== VERIFY (rev 0): passed=True score=1.0 (2/2)
+   critic: The evidence does not support that the DHW values exceeded Alert Level 3 thresholds. The Alert Level 3 threshold is 12 degC-weeks, but the 2016 DHW value of 11.4 is below this threshold. | Coral heat stress at Lakshadweep reefs was severe in both 2016 and 2024, with DHW values exceeding Alert Level 3 thresholds, indicating extreme heat s
+   critic: The claim that 11.4 falls within the Alert Level 3 range (12 degC-weeks) is incorrect. The value is below the threshold. | In 2016, the max_dhw of 11.4 falls within the CRW Alert Level 3 range (12 degC-weeks), indicating extreme heat stress and likely severe bleaching [E1]
+   critic: The evidence does not confirm that 12.1 corresponds to extreme heat stress. The Alert Level 3 threshold is 12 degC-weeks, and the value of 12.1 is just above this threshold, but the evidence does not  | In 2024, the max_dhw increased to 12.1, further confirming extreme heat stress and significant coral mortality [E1][E2].
+
+-- revision 1
+
+-- critic
+
+== VERIFY (rev 1): passed=True score=0.5 (2/4)
+   ! Numeric claim has no citation (numbers found in E1): "Coral heat stress at Lakshadweep reefs was severe in 2024, with a DHW value of 12.1, which is just above the CRW Alert Level 3 threshold of 12 degC-weeks."
+   ! Numeric claim has no citation (numbers found in E1): "In 2016, the DHW value of 11.4 was below the Alert Level 3 threshold."
+   critic: The evidence [E2] states that Alert Level 3 starts at 12 degC-weeks, but the max_dhw value of 11.4 is not explicitly compared to this threshold in the evidence. The claim is an inference not directly  | In 2016, the max_dhw of 11.4 was below the CRW Alert Level 3 threshold of 12 degC-weeks
+   critic: The evidence [E2] states that Alert Level 3 starts at 12 degC-weeks, but the max_dhw value of 12.1 is not explicitly compared to this threshold in the evidence. The claim is an inference not directly  | In 2024, the max_dhw of 12.1 exceeded the CRW Alert Level 3 threshold of 12 degC-weeks, indicating extreme heat stress
+
+== ANSWER
+Coral heat stress at Lakshadweep reefs was severe in 2024, with a DHW value of 12.1, which is just above the CRW Alert Level 3 threshold of 12 degC-weeks. In 2016, the DHW value of 11.4 was below the Alert Level 3 threshold.
+
+- In 2016, the max_dhw of 11.4 was below the CRW Alert Level 3 threshold of 12 degC-weeks [E1][E2].
+- In 2024, the max_dhw of 12.1 exceeded the CRW Alert Level 3 threshold of 12 degC-weeks, indicating extreme heat stress [E1][E2].
+
+Caveats: The evidence is based on synthetic data, which may not fully represent real-world conditions [E1]. The DHW thresholds are based on NOAA CRW guidelines, which may vary slightly by region or reef-specific conditions.
+
+**References**
+- [E1] query_data {"dataset": "D-CORAL", "columns": ["year", "max_dhw", "bleached_pct"], "where": {"region": "Lakshadweep Sea", "year": [2016, 2024]}, "group_by": ["year"], "order_by": "year"} -- ORCA synthetic demo dataset 'Annual coral reef monitoring at six Indian reef sites, 2004-2024', generated by orca/data/generate.py (seed 176). Not real observations.
+- [E2] search_knowledge {"query": "degree heating weeks bleaching threshold", "k": 3} -- NOAA Coral Reef Watch, "Methodology, Product Description" (5 km daily products). <https://coralreefwatch.noaa.gov/product/5km/methodology.php>
+
+_Some cited evidence comes from ORCA's synthetic demo datasets. Replace them with real observations before using these numbers for decisions._
+
+(38.8 s, 2 evidence records)
