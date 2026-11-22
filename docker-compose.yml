@@ -1,0 +1,57 @@
+# CPU-only by default. On an NVIDIA host add the GPU override:
+#   docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d
+name: orca
+
+services:
+  ollama:
+    image: ollama/ollama:${OLLAMA_IMAGE_TAG:-0.21.0}
+    restart: unless-stopped
+    environment:
+      OLLAMA_KEEP_ALIVE: 30m
+      OLLAMA_NUM_PARALLEL: "1"
+    volumes:
+      - ollama-models:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+    # Not published to the host: only the orca service talks to it.
+
+  ollama-pull:
+    # One-shot job: downloads the model into the shared volume, then exits.
+    image: ollama/ollama:${OLLAMA_IMAGE_TAG:-0.21.0}
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+    entrypoint: ["ollama", "pull", "${ORCA_MODEL:-qwen3:8b}"]
+    restart: "no"
+
+  orca:
+    build: .
+    image: orca-prompt:0.1.0
+    restart: unless-stopped
+    depends_on:
+      ollama-pull:
+        condition: service_completed_successfully
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      ORCA_OLLAMA_BASE_URL: http://ollama:11434
+      ORCA_MODEL: ${ORCA_MODEL:-qwen3:8b}
+    ports:
+      - "${ORCA_PORT:-8000}:8000"
+    volumes:
+      - orca-runs:/app/var
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  ollama-models:
+  orca-runs:

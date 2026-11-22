@@ -1,0 +1,31 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt pytest pytest-asyncio ruff==0.17.6
+      - run: ruff check orca tests
+      - run: pytest -q
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t orca-prompt:ci .
+      - name: smoke test (no LLM needed for health)
+        run: |
+          docker run -d --name orca -p 8000:8000 orca-prompt:ci
+          for i in $(seq 1 20); do curl -fs localhost:8000/api/health && break; sleep 1; done
+          curl -fs localhost:8000/api/datasets | grep -q D-OCEAN
+          docker rm -f orca
